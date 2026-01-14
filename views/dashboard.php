@@ -806,13 +806,17 @@ $userLabel = $_SESSION['user_label'] ?? 'Vault User';
             }
 
             async function fetchPassword(entryId) {
+                const params = new URLSearchParams();
+                params.set('entry_id', entryId);
+                params.set('csrf_token', csrfToken);
+
                 const response = await fetch('../api/vault-password.php', {
                     method: 'POST',
+                    credentials: 'same-origin',
                     headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-Token': csrfToken
+                        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                     },
-                    body: JSON.stringify({ entry_id: entryId })
+                    body: params.toString()
                 });
 
                 if (!response.ok) {
@@ -899,6 +903,9 @@ $userLabel = $_SESSION['user_label'] ?? 'Vault User';
                     if (isVisible) {
                         valueEl.textContent = valueEl.getAttribute('data-password-mask') || '';
                         valueEl.setAttribute('data-visible', 'false');
+                        valueEl.style.letterSpacing = '0.25em';
+                        valueEl.classList.add('text-slate-400');
+                        valueEl.classList.remove('text-slate-700', 'dark:text-slate-200');
                         button.textContent = 'visibility';
                         button.setAttribute('aria-label', 'Show password');
                         return;
@@ -920,6 +927,9 @@ $userLabel = $_SESSION['user_label'] ?? 'Vault User';
 
                     valueEl.textContent = password;
                     valueEl.setAttribute('data-visible', 'true');
+                    valueEl.style.letterSpacing = '0';
+                    valueEl.classList.remove('text-slate-400');
+                    valueEl.classList.add('text-slate-700', 'dark:text-slate-200');
                     button.textContent = 'visibility_off';
                     button.setAttribute('aria-label', 'Hide password');
                 });
