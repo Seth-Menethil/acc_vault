@@ -1,0 +1,13 @@
+{
+  "name": "acc_vault",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -i ./assets/tailwind-input.css -o ./assets/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./assets/tailwind-input.css -o ./assets/tailwind.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/forms": "^0.5.6",
+    "tailwindcss": "^3.4.10"
+  }
+}
