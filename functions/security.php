@@ -28,12 +28,6 @@ function set_security_headers(): void
     header('X-Content-Type-Options: nosniff');
     header('X-Frame-Options: DENY');
     header('Referrer-Policy: no-referrer');
-    header('Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()');
-    $csp = "default-src 'self'; script-src 'self' 'unsafe-inline'; "
-        . "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; "
-        . "img-src 'self' data: https://lh3.googleusercontent.com; connect-src 'self'; frame-ancestors 'none'; "
-        . "base-uri 'self'; form-action 'self'; object-src 'none'";
-    header('Content-Security-Policy: ' . $csp);
 }
 
 function csrf_token(): string
